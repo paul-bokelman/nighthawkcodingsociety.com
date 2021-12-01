@@ -1,0 +1,9 @@
+GET http://localhost:8080/greeting?name=USER_NAME
+// Java greeting
+
+###
+
+GET http://127.0.0.1:5000/greeting?name=USER_NAME
+// Python greeting
+
+###
