@@ -1,5 +1,8 @@
-# m22p2-impoders
+# The official website for the nighthawk coding society.
 
+<details>
+    <summary>m22p2-impoders</summary>
+    
 ## Team Members
 
 - Paul Bokelman, Brayden Basinger, Jacqueline Cheng, and Luca Pinto
@@ -53,3 +56,7 @@
 <b>Git policy:</b> We will not use branches but will work really hard to not break master branch.
 
 </sub>
+  
+</details>
+
+
