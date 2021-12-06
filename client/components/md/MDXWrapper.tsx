@@ -1,7 +1,7 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { preToCodeBlock } from "mdx-utils";
-import { Code, GitLinker } from "./components";
+import { Code, GitLinker, FRQPagination } from "./components";
 interface Props {
   children: React.ReactChild[];
 }
@@ -16,6 +16,7 @@ export const MDXWrapper = ({ children }: Props) => {
       return <pre {...preProps} />;
     },
     GitLinker,
+    FRQPagination,
   };
   return (
     <MDXProvider components={components}>

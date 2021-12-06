@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Highlight, { defaultProps } from "prism-react-renderer";
 // import { useStore } from "../../hooks";
 import { Dark, Light } from "./highlight";
+
 export const Code = ({ codeString, language, metastring, ...props }) => {
   // const dark = useStore((state) => state.dark);
   const dark = true;

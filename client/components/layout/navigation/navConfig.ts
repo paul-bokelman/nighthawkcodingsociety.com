@@ -17,7 +17,7 @@ interface Lone {
 
 interface NavConfig {
   dropdowns: { csa: Dropdown; csp: Dropdown };
-  standalones: { raspberrypi: Lone; git: Lone; pbl: Lone };
+  standalones: { raspberrypi: Lone; git: Lone; pbl: Lone; team: Lone };
 }
 
 const csa: Dropdown = {
@@ -115,7 +115,12 @@ const pbl: Lone = {
   href: "/pbl",
 };
 
+const team: Lone = {
+  label: "Team",
+  href: "/team",
+};
+
 export const navConfig: NavConfig = {
   dropdowns: { csp, csa },
-  standalones: { raspberrypi, git, pbl },
+  standalones: { raspberrypi, git, pbl, team },
 };

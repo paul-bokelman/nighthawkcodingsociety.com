@@ -1,0 +1,50 @@
+import { MDXWrapper } from "../../../components/md";
+
+<MDXWrapper>
+
+# Unit 3 Progress Check: FRQ
+
+Consider the following class.
+
+```
+public class LightSequence
+{
+
+public LightSequence(String seq)
+
+{ /* implementation not shown */ }
+
+public String insertSegment(String segment, int ind)
+
+{ /* implementation not shown */ }
+
+public void changeSequence(String seq)
+
+{ /* implementation not shown */ }
+
+public void display()
+
+{ /* implementation not shown */ }
+
+}
+```
+
+(a) Write a statement to create a LightSequence object gradShow that has the initial light sequence "0101 0101 0101".
+
+**LightSequence gradShow = new LightSequence ("0101 0101 0101");**
+
+(b) Write a statement that will call the display method to display the light sequence for the gradShow object.
+
+**gradShow.display();**
+
+(c) Write a statement that will be used to update the gradShow light sequence to "0011 0011 0011".
+
+**gradShow.changeSequence("0011 0011 0011");**
+
+(d) Write a code segment that will call the insertSegment method to insert the segment "1111 1111" in the current sequence for gradShow at index 4. The resulting sequence will be stored in the string resultSeq.
+
+**String resultSeq = gradShow.insertSegment("1111 1111", 4);**
+
+<FRQPagination />
+
+</MDXWrapper>
