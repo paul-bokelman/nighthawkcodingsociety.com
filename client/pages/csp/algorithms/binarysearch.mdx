@@ -1,0 +1,32 @@
+import { MDXWrapper } from "../../../components/md";
+import { BinarySearch } from "../../../components/pages/csp/algorithms";
+
+<MDXWrapper>
+
+# Binary Search
+
+Binary search, also known as half-interval search, logarithmic search, or binary chop, is a search algorithm that finds the position of a target value within a sorted array. Binary search compares the target value to the middle element of the array.
+
+```python /copy/
+def binary_search(arr, low, high, x):
+        if high >= low:
+            mid = (high + low) // 2
+            if arr[mid] == x:
+                return mid
+            elif arr[mid] > x:
+                return binary_search(arr, low, mid - 1, x)
+            else:
+                return binary_search(arr, mid + 1, high, x)
+        else:
+            return -1
+```
+
+### Interactive example:
+
+**Array:** Enter numbers separated by commas, this will be the array with all of the values that will be searched. Input does not need to be numerically sorted, input will be sorted automatically.
+
+**Value:** Enter a single number in or not in the array to be searched for.
+
+<BinarySearch />
+
+</MDXWrapper>

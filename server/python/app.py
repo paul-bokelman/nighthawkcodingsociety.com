@@ -33,32 +33,32 @@ def greeting():
 # # CSP Algorithm
 
 
-# @app.route('/csp/alg/binarysearch', methods=['GET', 'POST'])
-# def binary_search():
-#     d = request.get_json()
+@app.route('/csp/alg/binarysearch', methods=['GET', 'POST'])
+def binary_search():
+    d = request.get_json()
 
-#     def binary_search(arr, x):
-#         low = 0
-#         high = len(arr) - 1
-#         mid = 0
-#         while low <= high:
-#             mid = (high + low) // 2
-#             if arr[mid] < x:
-#                 low = mid + 1
-#             elif arr[mid] > x:
-#                 high = mid - 1
-#             else:
-#                 return mid
-#         return -1
-#     result = binary_search(d['arr'], d['x'])
-#     message = ""
-#     if result != -1:
-#         message = f"Value '{d['x']}' is present at index {str(result)} in the array {d['arr']} (sorted)."
-#         status = True
-#     else:
-#         message = f"Value '{d['x']}' is not present in the array, {d['arr']}."
-#         status = False
-#     return jsonify({'message': message, 'status': status})
+    def binary_search(arr, x):
+        low = 0
+        high = len(arr) - 1
+        mid = 0
+        while low <= high:
+            mid = (high + low) // 2
+            if arr[mid] < x:
+                low = mid + 1
+            elif arr[mid] > x:
+                high = mid - 1
+            else:
+                return mid
+        return -1
+    result = binary_search(d['arr'], d['x'])
+    message = ""
+    if result != -1:
+        message = f"Value '{d['x']}' is present at index {str(result)} in the array {d['arr']} (sorted)."
+        status = True
+    else:
+        message = f"Value '{d['x']}' is not present in the array, {d['arr']}."
+        status = False
+    return jsonify({'message': message, 'status': status})
 
 
 # @app.route('/csp/alg/bubblesort', methods=['GET', 'POST'])
