@@ -3,22 +3,24 @@ import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import { CgSpinner } from "react-icons/cg";
 import { Response, FormWrapper, fs } from "../../components/form";
-export const BinarySearch = (): JSX.Element => {
-  const [loading, setLoading] = useState<boolean>(false);
+export const BubbleSort = () => {
+  const [loading, setLoading] = useState(false);
   const [res, setRes] = useState<{
     status: boolean | undefined;
     message: string;
   }>({ status: undefined, message: "" });
+  const [og, setOg] = useState<number[]>([]);
   return (
     <>
       <FormWrapper>
         <Formik
-          initialValues={{ arr: "", x: "" }}
+          initialValues={{ arr: "" }}
           onSubmit={async (values) => {
+            setOg(values.arr.split(",").map(Number));
             setLoading(true);
             const response = await axios({
               method: "post",
-              url: "http://127.0.0.1:5000/csp/alg/binarysearch",
+              url: "http://127.0.0.1:5000/csp/alg/bubblesort",
               data: {
                 arr: values.arr
                   .split(",")
@@ -26,10 +28,8 @@ export const BinarySearch = (): JSX.Element => {
                   .sort(function (a, b) {
                     return a - b;
                   }),
-                x: values.x,
               },
             }).catch((error) => error);
-            console.log(response);
             setRes(response.data);
             setLoading(false);
           }}
@@ -41,16 +41,7 @@ export const BinarySearch = (): JSX.Element => {
                 name="arr"
                 className={fs.form}
                 type="text"
-                placeholder="1,4,8,9,43,56"
-              />
-            </label>
-            <label className="block mt-3">
-              <span className={fs.label}>Value</span>
-              <Field
-                name="x"
-                className={fs.form}
-                type="number"
-                placeholder="56"
+                placeholder="745,34,52,51,1,5,823"
               />
             </label>
             <button
@@ -68,6 +59,16 @@ export const BinarySearch = (): JSX.Element => {
         </Formik>
       </FormWrapper>
       <Response response={res} />
+      {/* {res.status !== undefined ? (
+        <div>
+          <p className="!text-green-400">{`Sorted array: [${res.arr.join(
+            ", "
+          )}]`}</p>
+          <p className="!text-red-400">{`Original array: [${og.join(
+            ", "
+          )}]`}</p>
+        </div>
+      ) : null} */}
     </>
   );
 };

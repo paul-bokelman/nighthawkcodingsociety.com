@@ -1,1 +1,4 @@
 /.DS_Store
+server/python/__pycache__/app.cpython-39.pyc
+server/python/database.db
+server/.vscode/settings.json

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Formik, Form, Field } from "formik";
 import { CgSpinner } from "react-icons/cg";
 import { Response, FormWrapper, fs } from "../../components/form";
-export const BinarySearch = (): JSX.Element => {
+export const Palindrome = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [res, setRes] = useState<{
     status: boolean | undefined;
@@ -13,44 +13,28 @@ export const BinarySearch = (): JSX.Element => {
     <>
       <FormWrapper>
         <Formik
-          initialValues={{ arr: "", x: "" }}
+          initialValues={{ str: "" }}
           onSubmit={async (values) => {
             setLoading(true);
             const response = await axios({
               method: "post",
-              url: "http://127.0.0.1:5000/csp/alg/binarysearch",
+              url: "http://127.0.0.1:5000/csp/alg/palindrome",
               data: {
-                arr: values.arr
-                  .split(",")
-                  .map(Number)
-                  .sort(function (a, b) {
-                    return a - b;
-                  }),
-                x: values.x,
+                str: values.str,
               },
             }).catch((error) => error);
-            console.log(response);
             setRes(response.data);
             setLoading(false);
           }}
         >
           <Form>
             <label className="block">
-              <span className={fs.label}>Array</span>
+              <span className={fs.label}>String</span>
               <Field
-                name="arr"
+                name="str"
                 className={fs.form}
                 type="text"
-                placeholder="1,4,8,9,43,56"
-              />
-            </label>
-            <label className="block mt-3">
-              <span className={fs.label}>Value</span>
-              <Field
-                name="x"
-                className={fs.form}
-                type="number"
-                placeholder="56"
+                placeholder="racecar"
               />
             </label>
             <button

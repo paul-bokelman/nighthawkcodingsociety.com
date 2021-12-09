@@ -1,0 +1,29 @@
+import { MDXWrapper } from "../../../components/md";
+import { BubbleSort } from "../../../components/pages/csp/algorithms";
+
+<MDXWrapper>
+
+# Bubble sort
+
+<Like />
+
+Bubble sort, sometimes referred to as sinking sort, is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted.
+
+```python /copy/
+def bubbleSort(arr):
+	n = len(arr)
+	for i in range(n-1):
+		for j in range(0, n-i-1):
+			if arr[j] > arr[j + 1] :
+				arr[j], arr[j + 1] = arr[j + 1], arr[j]
+```
+
+### Interactive example:
+
+**Array:** Enter numbers separated by commas, this will be the array with all of the values that will be searched. Input does not need to be numerically sorted, input will be sorted automatically.
+
+**Value:** Enter a single number in or not in the array to be searched for.
+
+<BubbleSort />
+
+</MDXWrapper>

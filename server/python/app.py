@@ -1,10 +1,10 @@
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 import time
 import random
 from multiprocessing import Value
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'I<+g/P2N$}0GXOf'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -14,9 +14,16 @@ CORS(app)
 
 # MODELS
 
-# class Color(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     color = db.Column(db.String(50))
+
+class Color(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    color = db.Column(db.String(50))
+
+
+class Likes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    route = db.Column(db.String(50))
+    likes = db.Column(db.Integer)
 
 
 counter = Value('i', 0)
@@ -30,7 +37,46 @@ def greeting():
         out = counter.value
     return jsonify({'id': out, 'content': f'Hello, {name}!'})
 
-# # CSP Algorithm
+
+@app.route('/getLikes', methods=['GET'])
+def getLikes():
+    route = request.args.get('route')
+    likes = Likes.query.filter(Likes.route == route).first()
+
+    if likes is None:
+        likes = Likes(route=route, likes=0)
+        db.session.add(likes)
+        db.session.flush()
+        db.session.commit()
+        return jsonify({'likes': likes.likes})
+    else:
+        return jsonify({'likes': likes.likes})
+
+
+@app.route('/like', methods=['GET'])
+def like():
+    route = request.args.get('route')
+    likes = Likes.query.filter(Likes.route == route).first()
+
+    def add_like():
+        likes.likes += 1
+        db.session.add(likes)
+        db.session.flush()
+        db.session.commit()
+        response = jsonify({'route': likes.route, 'likes': likes.likes})
+        return response, 200
+
+    if likes is None:
+        likes = Likes(route=route, likes=0)
+        db.session.add(likes)
+        db.session.flush()
+        db.session.commit()
+        return add_like()
+    else:
+        return add_like()
+
+
+# CSP Algorithm
 
 
 @app.route('/csp/alg/binarysearch', methods=['GET', 'POST'])
@@ -50,6 +96,7 @@ def binary_search():
             else:
                 return mid
         return -1
+
     result = binary_search(d['arr'], d['x'])
     message = ""
     if result != -1:
@@ -61,42 +108,43 @@ def binary_search():
     return jsonify({'message': message, 'status': status})
 
 
-# @app.route('/csp/alg/bubblesort', methods=['GET', 'POST'])
-# def bubble_sort():
-#     d = request.get_json()
-#     arr = d['arr']
+@app.route('/csp/alg/bubblesort', methods=['GET', 'POST'])
+def bubble_sort():
+    d = request.get_json()
+    arr = d['arr']
 
-#     def bubbleSort(arr):
-#         n = len(arr)
-#         for i in range(n-1):
-#             for j in range(0, n-i-1):
-#                 if arr[j] > arr[j + 1]:
-#                     arr[j], arr[j + 1] = arr[j + 1], arr[j]
-#     bubbleSort(arr)
-#     return jsonify({'arr': arr, 'status': True})
+    def bubbleSort(arr):
+        n = len(arr)
+        for i in range(n-1):
+            for j in range(0, n-i-1):
+                if arr[j] > arr[j + 1]:
+                    arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    bubbleSort(arr)
+    response = jsonify(
+        {'message': f"Numerically sorted array: {arr}.", 'status': True})
+    return response, 200
 
 
-# @app.route('/csp/alg/palindrome', methods=['GET', 'POST'])
-# def palindrome():
-#     d = request.get_json()
+@app.route('/csp/alg/palindrome', methods=['GET', 'POST'])
+def palindrome():
+    d = request.get_json()
 
-#     def isPalindrome(str):
-#         for i in range(0, int(len(str)/2)):
-#             if str[i] != str[len(str)-i-1]:
-#                 return False
-#         return True
-#     res = isPalindrome(d['str'])
-#     if (res):
-#         message = f"{d['str']} is a palindrome."
-#         status = True
-#     else:
-#         message = f"{d['str']} is not a palindrome."
-#         status = False
+    def isPalindrome(str):
+        for i in range(0, int(len(str)/2)):
+            if str[i] != str[len(str)-i-1]:
+                return False
+        return True
+    res = isPalindrome(d['str'])
+    if (res):
+        message = f"{d['str']} is a palindrome."
+        status = True
+    else:
+        message = f"{d['str']} is not a palindrome."
+        status = False
 
-#     return jsonify({'message': message, 'status': status})
+    return jsonify({'message': message, 'status': status})
 
 # # REST API
-
 
 # # SQL CRUD
 
@@ -112,7 +160,6 @@ def binary_search():
 
 # # Read all
 
-
 # @app.route('/csp/data/sql/read/colors', methods=['GET'])
 # def read_colors():
 #     colors_list = Color.query.all()
@@ -123,7 +170,6 @@ def binary_search():
 #     return response, 200
 
 # # Read 5 recent colors
-
 
 # @app.route('/csp/data/sql/read/colors/recent', methods=['GET'])
 # def read_recent():
@@ -137,7 +183,6 @@ def binary_search():
 
 # # Read 5 first colors
 
-
 # @app.route('/csp/data/sql/read/colors/first', methods=['GET'])
 # def read_first():
 #     colors_list = Color.query.order_by(Color.id.asc()).limit(5).all()
@@ -150,7 +195,6 @@ def binary_search():
 
 # # Update
 
-
 # @app.route('/csp/data/sql/update/color', methods=['PUT'])
 # def update_color():
 #     d = request.get_json()
@@ -162,7 +206,6 @@ def binary_search():
 
 # # Delete
 
-
 # @app.route('/csp/data/sql/remove/color', methods=['DELETE'])
 # def remove_color():
 #     d = request.get_json()
@@ -173,7 +216,6 @@ def binary_search():
 #     return f'Removed {old[0]} (id:{old[1]}) successfully', 201
 
 # # Get user records
-
 
 # @app.route('/csp/data/sql/read/colors/user', methods=['POST'])
 # def read_user():
@@ -188,7 +230,6 @@ def binary_search():
 # # API
 
 # # All paginated colors
-
 
 # @app.route('/csp/data/rest/table', methods=['GET'])
 # def table():
@@ -206,7 +247,6 @@ def binary_search():
 #     return jsonify({'colors': colors, 'total': res.get('total'), 'current_page': res.get('current_page'), 'per_page': res.get('per_page'), 'pages': res.get('pages')})
 
 # # Count all colors
-
 
 # @app.route('/csp/data/rest/chart', methods=['GET'])
 # def chart():
@@ -229,7 +269,6 @@ def binary_search():
 #     return jsonify({'colors_list': colors_list})
 
 # # seed database with valid colors
-
 
 # @app.route('/csp/data/rest/seed', methods=['GET'])
 # def seed():

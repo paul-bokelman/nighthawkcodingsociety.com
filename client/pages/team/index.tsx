@@ -6,6 +6,12 @@ interface Props {}
 const index: NextPage = (props: Props) => {
   return (
     <div>
+      <div>
+        <div>
+          <div></div>
+        </div>
+      </div>
+
       <Link href="/team/about">
         <a className="text-blue-500">About</a>
       </Link>

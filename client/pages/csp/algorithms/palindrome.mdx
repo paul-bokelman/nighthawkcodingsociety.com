@@ -1,0 +1,26 @@
+import { MDXWrapper } from "../../../components/md";
+import { Palindrome } from "../../../components/pages/csp/algorithms/Palindrome";
+
+<MDXWrapper>
+
+# Palindrome
+
+<Like />
+
+A palindrome is a string that reads the same forward and backward, for example, radar, toot, and madam. What needs to be done? Run a loop from starting to length/2 and check the first character to the last character of the string and second to second last one and so on …. If any character mismatches, the string wouldn’t be a palindrome.
+
+```python /copy/
+def isPalindrome(str):
+        for i in range(0, int(len(str)/2)):
+            if str[i] != str[len(str)-i-1]:
+                return False
+        return True
+```
+
+### Interactive example:
+
+**String:** Enter a string that can or cannot pass as a palindrome.
+
+<Palindrome />
+
+</MDXWrapper>
