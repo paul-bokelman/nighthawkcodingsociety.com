@@ -12,7 +12,7 @@ const index: NextPage = (props: Props) => {
         </div>
       </div>
 
-      <Link href="/team/about">
+      <Link href="/team/about/about">
         <a className="text-blue-500">About</a>
       </Link>
       <Link href="/team/frqs/unit2">

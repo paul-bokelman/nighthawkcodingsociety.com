@@ -1,7 +1,13 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { FaGithub } from "react-icons/fa";
 import { FiArrowUpRight } from "react-icons/fi";
-export const GitLinker = ({ title, permalink }) => {
+export const GitLinker = ({
+  title,
+  permalink,
+}: {
+  title: string;
+  permalink: string;
+}): ReactElement => {
   return (
     <div className="inline-block rounded-2xl bg-black/5 dark:bg-gray-100">
       <a href={permalink} className="!no-underline">

@@ -26,18 +26,6 @@ class Likes(db.Model):
     likes = db.Column(db.Integer)
 
 
-counter = Value('i', 0)
-
-
-@app.route('/greeting', methods=['GET'])
-def greeting():
-    name = request.args.get('name')
-    with counter.get_lock():
-        counter.value += 1
-        out = counter.value
-    return jsonify({'id': out, 'content': f'Hello, {name}!'})
-
-
 @app.route('/getLikes', methods=['GET'])
 def getLikes():
     route = request.args.get('route')

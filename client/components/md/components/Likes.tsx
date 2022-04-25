@@ -7,11 +7,11 @@ interface Props {
   route: string;
 }
 
-export const Likes = (props: Props) => {
+export const Likes = (props: Props): JSX.Element => {
   const [liked, setLiked] = useState<boolean>(false);
   const [likes, setLikes] = useState(null);
   const router = useRouter();
-  const p = router.pathname.split("/");
+  const p = router.asPath.split("/");
   const route = p[p.length - 1];
 
   const like = useCallback(async () => {
@@ -43,7 +43,7 @@ export const Likes = (props: Props) => {
       onClick={liked ? () => console.log("already liked") : like}
       className={`${
         liked ? "bg-red-100 text-red-500" : "bg-gray-100 text-gray-500"
-      } inline-block cursor-pointer px-4 rounded-xl`}
+      } inline-block cursor-pointer px-4 rounded-xl mr-4`}
     >
       <BsHeartFill className="mr-2 inline" />
       <p className="uppercase text-sm inline font-bold">{likes}</p>

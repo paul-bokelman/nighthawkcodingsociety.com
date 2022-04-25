@@ -11,8 +11,8 @@ export const Navigation = () => {
 
   return (
     <Wrapper>
-      {router.pathname === "/csa" || router.pathname === "/csp" ? (
-        <Nested route={router.pathname} />
+      {router.pathname.includes("csa") || router.pathname.includes("csp") ? (
+        <Nested route={`/${router.pathname.split("/")[1]}`} />
       ) : (
         <Main />
       )}

@@ -29,7 +29,6 @@ export const BinarySearch = (): JSX.Element => {
                 x: values.x,
               },
             }).catch((error) => error);
-            console.log(response);
             setRes(response.data);
             setLoading(false);
           }}

@@ -1,0 +1,33 @@
+---
+title: "Palindrome"
+excerpt: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilities morbi tempus."
+coverImage: "/about/red.png"
+date: "2020-03-16T05:35:07.322Z"
+author:
+  name: Paul Bokelman
+  picture: "https://avatars.githubusercontent.com/u/72945168?v=4"
+  github: "paul-bokelman"
+ogImage:
+  url: "/about/red.png"
+---
+
+<Likes />
+
+<GitLinker
+  title="Palindrome"
+  permalink="https://github.com/paul-bokelman/nighthawkcodingsociety.com/blob/613d5281a919bb5bcd269fa5b3d73e7eb86d650e/server/python/app.py#L128-L145"
+/>
+
+A palindrome is a string that reads the same forward and backward, for example, radar, toot, and madam. What needs to be done? Run a loop from starting to length/2 and check the first character to the last character of the string and second to second last one and so on …. If any character mismatches, the string wouldn’t be a palindrome.
+
+```python /copy/
+def isPalindrome(str):
+        for i in range(0, int(len(str)/2)):
+            if str[i] != str[len(str)-i-1]:
+                return False
+        return True
+```
+
+### Interactive example:
+
+**String:** Enter a string that can or cannot pass as a palindrome.
